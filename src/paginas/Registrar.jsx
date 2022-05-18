@@ -54,7 +54,7 @@ const Registrar = () => {
             className="uppercase text-gray-600 block text-xl font-bold"
             htmlFor="password2"
           >
-           Repetir Password
+            Repetir Password
           </label>
           <input
             id="password2"
