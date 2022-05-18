@@ -16,9 +16,26 @@ const Registrar = () => {
       setAlerta({
         msg: "Todos los campos son obligatorios",
         error: true,
-      })
-      return 
+      });
+      return;
     }
+    if (password !== repetirPassword) {
+      setAlerta({
+        msg: "Las contraseñas no coinciden",
+        error: true,
+      });
+      return;
+    }
+    if (password.length < 6) {
+      setAlerta({
+        msg: "Las contraseña debe tener minimo 6 caracteres",
+        error: true,
+      });
+      return;
+    }
+    setAlerta({});
+    //Crear el usuario en la base de datos
+    console.log("Creando...");
   };
 
   const { msg, error } = alerta;
