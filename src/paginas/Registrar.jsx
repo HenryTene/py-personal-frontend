@@ -7,6 +7,7 @@ const Registrar = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repetirPassword, setrepetirPassword] = useState("");
+
   const [alerta, setAlerta] = useState({});
 
   const handleSubmit = (e) => {
@@ -22,6 +23,7 @@ const Registrar = () => {
   };
 
   const { msg, error } = alerta;
+
 
   return (
     <>
