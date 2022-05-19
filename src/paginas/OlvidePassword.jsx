@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Alerta from "../components/Alerta";
 const OlvidePassword = () => {
   const [email, setEmail] = useState("");
   const [alerta, setAlerta] = useState({});
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (email === "" || email.length < 6) {
       setAlerta({
         msg: "El email es obligatorio",
@@ -13,6 +15,22 @@ const OlvidePassword = () => {
       });
 
       return;
+    }
+    try {
+      //TODO:Mover hacia un cliente AXIOS
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/usuarios/olvide-password`,
+        { email }
+      );
+      setAlerta({
+        msg: data.msg,
+        error: false,
+      });
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
     }
   };
   const { msg } = alerta;
