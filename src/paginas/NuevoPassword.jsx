@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
+import clienteAxios from "../config/clienteAxios";
 import Alerta from "../components/Alerta";
 
 const NuevoPassword = () => {
@@ -13,10 +13,7 @@ const NuevoPassword = () => {
   useEffect(() => {
     const comprobarToken = async () => {
       try {
-        //TODO:Mover hacia un cliente AXIOS
-        await axios.get(
-          `http://localhost:4000/api/usuarios/olvide-password/${token}`
-        );
+        await clienteAxios.get(`/usuarios/olvide-password/${token}`);
         setTokenValido(true);
       } catch (error) {
         setAlerta({
@@ -39,8 +36,8 @@ const NuevoPassword = () => {
     }
 
     try {
-      const url = `http://localhost:4000/api/usuarios/olvide-password/${token}`;
-      const { data } = await axios.post(url, { password });
+      const url = `/usuarios/olvide-password/${token}`;
+      const { data } = await clienteAxios.post(url, { password });
       setAlerta({
         msg: data.msg,
         error: false,
@@ -89,7 +86,7 @@ const NuevoPassword = () => {
 
           <input
             type="submit"
-            value="Crear cuenta"
+            value="Guardar Nuevo Password"
             className="bg-sky-700 mb-5 w-full  py-3 uppercase   font-bold text-white 
        rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
           />
