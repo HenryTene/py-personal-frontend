@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+
+   
+
   return (<AuthContext.Provider value={{}}>{children}</AuthContext.Provider>);
 };
 
