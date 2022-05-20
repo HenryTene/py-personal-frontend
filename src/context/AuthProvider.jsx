@@ -1,13 +1,44 @@
-import React, { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
+import clienteAxios from "../config/clienteAxios";
 import { Link, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState({});
 
-   
+  useEffect(() => {
+    const autenticarUsuario = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return;
+      }
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-  return (<AuthContext.Provider value={{}}>{children}</AuthContext.Provider>);
+      try {
+        const { data } = await clienteAxios("/usuarios/perfil", config);
+        setAuth(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    autenticarUsuario();
+  }, []);
+
+  return (
+    <AuthContext.Provider
+      value={{
+        setAuth,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthProvider };
