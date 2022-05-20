@@ -7,6 +7,7 @@ import OlvidePassword from "./paginas/OlvidePassword";
 import NuevoPassword from "./paginas/NuevoPassword";
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta";
 import Proyectos from "./paginas/Proyectos";
+import NuevoProyecto from "./paginas/NuevoProyecto";
 import { AuthProvider } from "./context/AuthProvider";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           </Route>
           <Route path="/proyectos" element={<RutaProtegida />}>
             <Route index element={<Proyectos />} />
+            <Route path="crear-proyecto" element={<NuevoProyecto />} />
           </Route>
         </Routes>
       </AuthProvider>
