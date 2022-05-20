@@ -34,7 +34,6 @@ const Login = () => {
         msg: error.response.data.msg,
         error: true,
       });
-      console.log(error);
     }
   };
   const { msg } = alerta;
