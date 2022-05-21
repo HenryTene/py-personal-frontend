@@ -42,12 +42,10 @@ const ProyectosProvider = ({ children }) => {
 
   const submitProyecto = async (proyecto) => {
     if (proyecto.id) {
-      editarProyecto(proyecto);
+      await editarProyecto(proyecto);
     } else {
-      nuevoProyecto(proyecto);
+      await nuevoProyecto(proyecto);
     }
-    
-    
   };
 
   const editarProyecto = async (proyecto) => {
@@ -63,14 +61,25 @@ const ProyectosProvider = ({ children }) => {
         },
       };
 
-      const { data } = await clienteAxios.put(`/proyectos/${proyecto.id}`,proyecto, config);
+      const { data } = await clienteAxios.put(
+        `/proyectos/${proyecto.id}`,
+        proyecto,
+        config
+      );
       //Sincronizar state
+      const proyectosActualizados = proyectos.map((proyectoState) =>
+        proyectoState._id === data._id ? data : proyectoState
+      );
+      setProyectos(proyectosActualizados);
+      setAlerta({
+        msg: "Proyecto actualizado correctamente",
+        error: false,
+      });
 
-
-      //Mostrar alerta
-
-
-      //Redireccionar
+      setTimeout(() => {
+        setAlerta({});
+        navigate("/proyectos");
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
