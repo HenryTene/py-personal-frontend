@@ -41,6 +41,41 @@ const ProyectosProvider = ({ children }) => {
   };
 
   const submitProyecto = async (proyecto) => {
+    if (proyecto.id) {
+      editarProyecto(proyecto);
+    } else {
+      nuevoProyecto(proyecto);
+    }
+    
+    
+  };
+
+  const editarProyecto = async (proyecto) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) return;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await clienteAxios.put(`/proyectos/${proyecto.id}`,proyecto, config);
+      //Sincronizar state
+
+
+      //Mostrar alerta
+
+
+      //Redireccionar
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const nuevoProyecto = async (proyecto) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -84,7 +119,7 @@ const ProyectosProvider = ({ children }) => {
       setProyecto(data);
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setCargando(false);
     }
   };
@@ -97,7 +132,7 @@ const ProyectosProvider = ({ children }) => {
         submitProyecto,
         obtenerProyecto,
         proyecto,
-        cargando
+        cargando,
       }}
     >
       {children}
