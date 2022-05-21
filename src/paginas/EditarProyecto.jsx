@@ -5,25 +5,26 @@ import FormularioProyecto from "../components/FormularioProyecto";
 
 const EditarProyecto = () => {
   const params = useParams();
-  const { obtenerProyecto, proyecto, cargando, eliminarProyecto } = useProyectos();
+  const { obtenerProyecto, proyecto, cargando, eliminarProyecto } =
+    useProyectos();
 
   useEffect(() => {
     obtenerProyecto(params.id);
   }, []);
 
   const handleClick = () => {
-    if(confirm("¿Estas seguro de que quieres eliminar este proyecto?")){
+    if (confirm("¿Estas seguro de que quieres eliminar este proyecto?")) {
       eliminarProyecto(params.id);
-    }else{
+    } else {
       console.log("Cancelado");
     }
-  }
+  };
 
   const { nombre } = proyecto;
   if (cargando)
     return (
-      <div class=" flex justify-center items-center">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-900"></div>
+      <div className=" flex justify-center items-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-900"></div>
       </div>
     );
   return (
@@ -43,10 +44,9 @@ const EditarProyecto = () => {
               clipRule="evenodd"
             />
           </svg>
-          <button
-           className="uppercase font-bold"
-           onClick={handleClick}
-           >Eliminar</button>
+          <button className="uppercase font-bold" onClick={handleClick}>
+            Eliminar
+          </button>
         </div>
       </div>
       <div className="mt-10 flex justify-center ">
