@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 const ProyectosContext = createContext();
 const ProyectosProvider = ({ children }) => {
   const [proyectos, setProyectos] = useState([]);
-  const [alerta, setAlerta] = useState([]);
+  const [alerta, setAlerta] = useState({});
+  const [proyecto, setProyecto] = useState({});
+  const [cargando, setCargando] = useState(true);
 
   const navigate = useNavigate();
 
@@ -68,6 +70,7 @@ const ProyectosProvider = ({ children }) => {
     }
   };
   const obtenerProyecto = async (id) => {
+    setCargando(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
@@ -77,11 +80,12 @@ const ProyectosProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const {data} = await clienteAxios(`/proyectos/${id}`, config);
-      console.log(data);
-      
+      const { data } = await clienteAxios(`/proyectos/${id}`, config);
+      setProyecto(data);
     } catch (error) {
       console.log(error);
+    }finally{
+      setCargando(false);
     }
   };
   return (
@@ -92,6 +96,8 @@ const ProyectosProvider = ({ children }) => {
         alerta,
         submitProyecto,
         obtenerProyecto,
+        proyecto,
+        cargando
       }}
     >
       {children}
