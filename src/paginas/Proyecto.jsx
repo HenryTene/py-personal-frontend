@@ -13,8 +13,8 @@ const Proyecto = () => {
   const { nombre } = proyecto;
 
   return cargando ? (
-    <div class=" flex justify-center items-center">
-      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-900"></div>
+    <div className=" flex justify-center items-center">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-900"></div>
     </div>
   ) : (
     <div className="flex justify-between">
