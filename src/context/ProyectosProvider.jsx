@@ -10,6 +10,7 @@ const ProyectosProvider = ({ children }) => {
   const [cargando, setCargando] = useState(true);
   const [modalFormularioTarea, setModalFormularioTarea] = useState(false);
   const [tarea, setTarea] = useState({});
+  const [modalEliminarTarea, setModalEliminarTarea] = useState(false);
 
   const navigate = useNavigate();
 
@@ -227,8 +228,8 @@ const ProyectosProvider = ({ children }) => {
 
       //TODO : Actualizar el DOM
       const proyectoActualizado = { ...proyecto };
-      proyectoActualizado.tareas = proyectoActualizado  .tareas.map((tareaState) =>
-        tareaState._id === data._id ? data : tareaState
+      proyectoActualizado.tareas = proyectoActualizado.tareas.map(
+        (tareaState) => (tareaState._id === data._id ? data : tareaState)
       );
 
       setProyecto(proyectoActualizado);
@@ -244,6 +245,12 @@ const ProyectosProvider = ({ children }) => {
     setTarea(tarea);
     setModalFormularioTarea(true);
   };
+
+  const handleModalEliminarTarea = (tarea) => {
+    setTarea(tarea);
+    setModalEliminarTarea(!modalEliminarTarea);
+  };
+
   return (
     <ProyectosContext.Provider
       value={{
@@ -260,6 +267,8 @@ const ProyectosProvider = ({ children }) => {
         submitTarea,
         handleModalEditarTarea,
         tarea,
+        modalEliminarTarea,
+        handleModalEliminarTarea,
       }}
     >
       {children}
