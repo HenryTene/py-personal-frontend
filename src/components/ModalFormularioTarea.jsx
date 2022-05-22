@@ -11,22 +11,37 @@ const ModalFormularioTarea = () => {
   const [fechaEntrega, setFechaEntrega] = useState("");
   const [prioridad, setPrioridad] = useState(false);
 
-  const params  = useParams();
-  
+  const params = useParams();
 
-  const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea } =
-    useProyectos();
+  const {
+    modalFormularioTarea,
+    handleModalTarea,
+    mostrarAlerta,
+    alerta,
+    submitTarea,
+  } = useProyectos();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if ([nombre, descripcion,fechaEntrega, prioridad].includes("")) {
+    if ([nombre, descripcion, fechaEntrega, prioridad].includes("")) {
       mostrarAlerta({
         msg: "Todos los campos son obligatorios",
         error: true,
       });
       return;
     }
-    submitTarea({ nombre, descripcion,fechaEntrega, prioridad,proyecto:params.id });
+    await submitTarea({
+      nombre,
+      descripcion,
+      fechaEntrega,
+      prioridad,
+      proyecto: params.id,
+    });
+
+    setNombre("");
+    setDescripcion("");
+    setFechaEntrega("");
+    setPrioridad("");
   };
 
   const { msg } = alerta;
@@ -144,14 +159,12 @@ const ModalFormularioTarea = () => {
                       </label>
                       <input
                         type="date"
-                        id="fecha-entrega"                       
+                        id="fecha-entrega"
                         className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={fechaEntrega}
                         onChange={(e) => setFechaEntrega(e.target.value)}
                       />
                     </div>
-
-
 
                     <div className="mb-5">
                       <label
