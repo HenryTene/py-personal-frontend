@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 const PRIORIDAD = ["Baja", "Media", "Alta"];
 const ModalFormularioTarea = () => {
-
   const [id, setId] = useState("");
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -30,8 +29,8 @@ const ModalFormularioTarea = () => {
       setNombre(tarea.nombre);
       setDescripcion(tarea.descripcion);
       setFechaEntrega(tarea.fechaEntrega?.split("T")[0]);
-      setPrioridad(tarea.prioridad);  
-      return 
+      setPrioridad(tarea.prioridad);
+      return;
     }
     setId("");
     setNombre("");
@@ -50,7 +49,7 @@ const ModalFormularioTarea = () => {
       return;
     }
     await submitTarea({
-      id, 
+      id,
       nombre,
       descripcion,
       fechaEntrega,
@@ -209,8 +208,7 @@ const ModalFormularioTarea = () => {
                     <input
                       type="submit"
                       className="bg-sky-600 hover:bg-sky-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded text-sm"
-                      value={id? "Editar" : "Crear"}
-
+                      value={id ? "Editar" : "Crear"}
                     />
                   </form>
                 </div>
