@@ -8,10 +8,10 @@ const Tarea = ({ tarea }) => {
   return (
     <div className="border-b p-5 flex justify-between items-center">
       <div>
-        <p className="mb-2 text-xl">{nombre}</p>
-        <p className="mb-2 text-sm text-gray-500 uppercase">{descripcion}</p>
-        <p className="mb-2 text-xl">{formatearFecha(fechaEntrega)}</p>
-        <p className="mb-2 text-gray-600">Prioridad: {prioridad}</p>
+        <p className="mb-1 text-xl">{nombre}</p>
+        <p className="mb-1 text-sm text-gray-500 uppercase">{descripcion}</p>
+        <p className="mb-1 text-sm">{formatearFecha(fechaEntrega)}</p>
+        <p className="mb-1 text-gray-600">Prioridad: {prioridad}</p>
       </div>
 
       <div className="flex gap-2">
