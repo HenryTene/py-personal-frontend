@@ -9,8 +9,6 @@ const Proyecto = () => {
   const { obtenerProyecto, proyecto, cargando, handleModalTarea } =
     useProyectos();
 
-  
-
   useEffect(() => {
     obtenerProyecto(params.id);
   }, []);
@@ -84,7 +82,7 @@ const Proyecto = () => {
         )}
       </div>
 
-      <ModalFormularioTarea  />
+      <ModalFormularioTarea />
     </>
   );
 };
