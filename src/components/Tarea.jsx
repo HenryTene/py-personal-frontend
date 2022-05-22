@@ -1,6 +1,8 @@
 import { formatearFecha } from "../helpers/formatearFecha";
+import useProyectos from "../hooks/useProyectos";
 
 const Tarea = ({ tarea }) => {
+  const { handleModalEditarTarea } = useProyectos();
   const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea;
 
   return (
@@ -16,6 +18,7 @@ const Tarea = ({ tarea }) => {
         <button
           className="bg-indigo-600 py-3 px-4 text-white 
            uppercase font-bold text-sm  rounded-lg"
+          onClick={() => handleModalEditarTarea(tarea)}
         >
           Editar
         </button>
