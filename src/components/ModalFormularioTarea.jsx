@@ -54,7 +54,7 @@ const ModalFormularioTarea = () => {
       descripcion,
       fechaEntrega,
       prioridad,
-      proyecto: params.id,
+      proyecto:params.id,
     });
 
     setId("");
