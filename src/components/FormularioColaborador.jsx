@@ -4,7 +4,7 @@ import Alerta from "./Alerta";
 
 const FormularioColaborador = () => {
   const [email, setEmail] = useState("");
-  const { mostrarAlerta, alerta,submitColaborador } = useProyectos();
+  const { mostrarAlerta, alerta, submitColaborador } = useProyectos();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ const FormularioColaborador = () => {
       });
       return;
     }
-    submitColaborador( email );
+    submitColaborador(email);
   };
   const { msg } = alerta;
   return (
@@ -24,7 +24,7 @@ const FormularioColaborador = () => {
       className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow"
       onSubmit={handleSubmit}
     >
-        {msg && <Alerta alerta={alerta} />}
+      {msg && <Alerta alerta={alerta} />}
       <div className="mb-5">
         <label
           className="text-gray-700 uppercase block  font-bold text-sm"
