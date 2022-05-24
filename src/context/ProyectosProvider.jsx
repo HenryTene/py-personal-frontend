@@ -290,7 +290,6 @@ const ProyectosProvider = ({ children }) => {
   };
 
   const submitColaborador = async (email) => {
-
     setCargando(true);
     try {
       const token = localStorage.getItem("token");
@@ -303,15 +302,20 @@ const ProyectosProvider = ({ children }) => {
         },
       };
 
-     const { data } = await clienteAxios.post('/proyectos/colaboradores', {email}, config)
-     setColaborador(data);
+      const { data } = await clienteAxios.post(
+        "/proyectos/colaboradores",
+        { email },
+        config
+      );
+      setColaborador(data);
       setAlerta({});
+      
     } catch (error) {
-     setAlerta({
+      setAlerta({
         msg: error.response.data.msg,
         error: true,
-     });
-    }finally{
+      });
+    } finally {
       setCargando(false);
     }
   };
@@ -336,6 +340,7 @@ const ProyectosProvider = ({ children }) => {
         handleModalEliminarTarea,
         eliminarTarea,
         submitColaborador,
+       
       }}
     >
       {children}
