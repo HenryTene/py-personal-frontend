@@ -11,6 +11,7 @@ const ProyectosProvider = ({ children }) => {
   const [modalFormularioTarea, setModalFormularioTarea] = useState(false);
   const [tarea, setTarea] = useState({});
   const [modalEliminarTarea, setModalEliminarTarea] = useState(false);
+  const [colaborador, setColaborador] = useState({});
 
   const navigate = useNavigate();
 
@@ -263,23 +264,26 @@ const ProyectosProvider = ({ children }) => {
         },
       };
 
-      const { data } = await clienteAxios.delete(`/tareas/${tarea._id}`, config);
+      const { data } = await clienteAxios.delete(
+        `/tareas/${tarea._id}`,
+        config
+      );
       setAlerta({
         msg: data.msg,
-        error: false
+        error: false,
       });
       //TODO : Actualizar el DOM
       const proyectoActualizado = { ...proyecto };
-      proyectoActualizado.tareas = proyectoActualizado.tareas.filter(tareaState => tareaState._id !== tarea._id);
+      proyectoActualizado.tareas = proyectoActualizado.tareas.filter(
+        (tareaState) => tareaState._id !== tarea._id
+      );
 
       setProyecto(proyectoActualizado);
       setModalEliminarTarea(false);
       setTarea({});
       setTimeout(() => {
-
         setAlerta({});
-
-      } , 3000);
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -287,8 +291,30 @@ const ProyectosProvider = ({ children }) => {
 
   const submitColaborador = async (email) => {
 
-    console.log(email)
-  }
+    setCargando(true);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+     const { data } = await clienteAxios.post('/proyectos/colaboradores', {email}, config)
+     setColaborador(data);
+      setAlerta({});
+    } catch (error) {
+     setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+     });
+    }finally{
+      setCargando(false);
+    }
+  };
 
   return (
     <ProyectosContext.Provider
@@ -309,7 +335,7 @@ const ProyectosProvider = ({ children }) => {
         modalEliminarTarea,
         handleModalEliminarTarea,
         eliminarTarea,
-        submitColaborador
+        submitColaborador,
       }}
     >
       {children}
