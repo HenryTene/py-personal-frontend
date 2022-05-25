@@ -3,7 +3,8 @@ import useProyectos from "../hooks/useProyectos";
 import useAdmin from "../hooks/useAdmin";
 
 const Tarea = ({ tarea }) => {
-  const { handleModalEditarTarea, handleModalEliminarTarea } = useProyectos();
+  const { handleModalEditarTarea, handleModalEliminarTarea, completarTarea } =
+    useProyectos();
   const admin = useAdmin();
   const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea;
 
@@ -26,29 +27,24 @@ const Tarea = ({ tarea }) => {
             Editar
           </button>
         )}
-        {estado ? (
-          <button
-            className="bg-green-600 py-3 px-4 text-white 
-                  uppercase font-bold text-sm  rounded-lg"
-          >
-            Completa
-          </button>
-        ) : (
-          <button
-            className="bg-orange-600 py-3 px-4 text-white 
-                 uppercase font-bold text-sm  rounded-lg"
-          >
-            Incompleta
-          </button>
-        )}
-        {admin && (
+
         <button
-          className="bg-red-600 py-3 px-4 text-white 
-           uppercase font-bold text-sm  rounded-lg"
-          onClick={() => handleModalEliminarTarea(tarea)}
+          className={` ${
+            estado ? "bg-green-600" : "bg-gray-600"
+          } py-3 px-4 text-white uppercase font-bold text-sm  rounded-lg"`}
+          onClick={() => completarTarea(_id)}
         >
-          Eliminar
+          {estado ? "Completa" : "Incompleta"}
         </button>
+
+        {admin && (
+          <button
+            className="bg-red-600 py-3 px-4 text-white 
+           uppercase font-bold text-sm  rounded-lg"
+            onClick={() => handleModalEliminarTarea(tarea)}
+          >
+            Eliminar
+          </button>
         )}
       </div>
     </div>
