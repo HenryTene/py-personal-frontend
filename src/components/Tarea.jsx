@@ -1,8 +1,10 @@
 import { formatearFecha } from "../helpers/formatearFecha";
 import useProyectos from "../hooks/useProyectos";
+import useAdmin from "../hooks/useAdmin";
 
 const Tarea = ({ tarea }) => {
   const { handleModalEditarTarea, handleModalEliminarTarea } = useProyectos();
+  const admin = useAdmin();
   const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea;
 
   return (
@@ -15,13 +17,15 @@ const Tarea = ({ tarea }) => {
       </div>
 
       <div className="flex gap-2">
-        <button
-          className="bg-indigo-600 py-3 px-4 text-white 
+        {admin && (
+          <button
+            className="bg-indigo-600 py-3 px-4 text-white 
            uppercase font-bold text-sm  rounded-lg"
-          onClick={() => handleModalEditarTarea(tarea)}
-        >
-          Editar
-        </button>
+            onClick={() => handleModalEditarTarea(tarea)}
+          >
+            Editar
+          </button>
+        )}
         {estado ? (
           <button
             className="bg-green-600 py-3 px-4 text-white 
@@ -37,7 +41,7 @@ const Tarea = ({ tarea }) => {
             Incompleta
           </button>
         )}
-
+        {admin && (
         <button
           className="bg-red-600 py-3 px-4 text-white 
            uppercase font-bold text-sm  rounded-lg"
@@ -45,6 +49,7 @@ const Tarea = ({ tarea }) => {
         >
           Eliminar
         </button>
+        )}
       </div>
     </div>
   );
