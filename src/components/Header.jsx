@@ -4,13 +4,14 @@ const Header = () => {
   return (
     <header className="px-4 py-5 bg-white border-b ">
       <div className="md:flex md:justify-between ">
-        <h2 className="text-4xl text-sky-600 font to-black">Simple Project</h2>
-        <input
-          type="search"
-          placeholder="Buscar Proyecto"
-          className="lg:w-1/3 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-sky-600"
-        />
-        <div className="flex items-center gap-4">
+        <h2 className="text-4xl text-sky-600 font to-black mb-5 md:mb-0">
+          Simple Project
+        </h2>
+
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <button type="button" className="font-bold uppercase">
+            Buscar Proyecto
+          </button>
           <Link to="/proyectos" className="font-bold uppercase ">
             Proyectos
           </Link>
