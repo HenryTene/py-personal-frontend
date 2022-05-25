@@ -142,7 +142,7 @@ const ProyectosProvider = ({ children }) => {
       });
       setTimeout(() => {
         setAlerta({});
-      }, 2000);
+      }, 1000);
     } finally {
       setCargando(false);
     }
