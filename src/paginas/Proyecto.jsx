@@ -22,9 +22,11 @@ const Proyecto = () => {
   
 
   if (cargando) return "Cargando...";
+
   const { msg } = alerta;
 
   return (
+    msg && alerta.error ? <Alerta alerta={alerta}/>: (
     <>
       <div className="flex justify-between">
         <h1 className="font-black text-4xl">{nombre}</h1>
@@ -122,6 +124,7 @@ const Proyecto = () => {
       <ModalEliminarTarea />
       <ModalEliminarColaborador />
     </>
+    )
   );
 };
 
