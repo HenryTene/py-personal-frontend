@@ -8,11 +8,23 @@ import ModalEliminarColaborador from "../components/ModalEliminarColaborador";
 import Tarea from "../components/Tarea";
 import Alerta from "../components/Alerta";
 import Colaborador from "../components/Colaborador";
+import io from "socket.io-client";
+
+let socket;
 
 const Proyecto = () => {
   const params = useParams();
-  const { obtenerProyecto, proyecto, cargando, handleModalTarea, alerta } =
-    useProyectos();
+  const {
+    obtenerProyecto,
+    proyecto,
+    cargando,
+    handleModalTarea,
+    alerta,
+    submitTareasProyecto,
+    eliminarTareaProyecto,
+    actualizarTareaProyecto,
+    cambiarEstadoTarea,
+  } = useProyectos();
 
   const admin = useAdmin();
 
@@ -20,15 +32,44 @@ const Proyecto = () => {
     obtenerProyecto(params.id);
   }, []);
 
-  const { nombre } = proyecto;
+  useEffect(() => {
+    socket = io(import.meta.env.VITE_BACKEND_URL);
+    socket.emit("abrir proyecto", params.id);
+  }, []);
 
-  console.log(proyecto);
+  useEffect(() => {
+    socket.on("tarea agregada", (tareaNueva) => {
+      if (tareaNueva.proyecto === proyecto._id) {
+        submitTareasProyecto(tareaNueva);
+      }
+    });
+
+    socket.on("tarea eliminada", (tareaEliminada) => {
+      if (tareaEliminada.proyecto === proyecto._id) {
+        eliminarTareaProyecto(tareaEliminada);
+      }
+    });
+
+    socket.on("tarea actualizada", (tareaActualizada) => {
+      if (tareaActualizada.proyecto._id === proyecto._id) {
+        actualizarTareaProyecto(tareaActualizada);
+      }
+    });
+
+    socket.on("nuevo estado", (nuevoEstadoTarea) => {
+      if (nuevoEstadoTarea.proyecto._id === proyecto._id) {
+        cambiarEstadoTarea(nuevoEstadoTarea);
+      }
+    });
+  });
+
+  const { nombre } = proyecto;
 
   if (cargando) return "Cargando...";
 
   const { msg } = alerta;
 
-  return  (
+  return (
     <>
       <div className="flex justify-between">
         <h1 className="font-black text-4xl">{nombre}</h1>
@@ -80,7 +121,6 @@ const Proyecto = () => {
         </button>
       )}
       <p className="font-bold text-xl mt-10">Tareas del Proyecto</p>
-     
 
       <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? (
