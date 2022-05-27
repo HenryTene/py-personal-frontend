@@ -1,6 +1,6 @@
 # Frontend Simple Project
 
-Para levantar este backend necesitas lo siguiente
+Para levantar este frontend necesitas lo siguiente
 # Requisitos
 
 Para este proyecto necesitas tener instalado lo siguiente:
