@@ -5,14 +5,9 @@ Para levantar este frontend necesitas lo siguiente
 
 Para este proyecto necesitas tener instalado lo siguiente:
 
-- Node.js
-- MongoDB 
-- Express
-- Mongoose
-- JWT
-- bcrypt
-- cors
-- morgan
+- React
+- Vite 
+- Tailwind
 - dotenv
 
 
