@@ -30,20 +30,14 @@ Para configurar este proyecto de forma local sigue estas instrucciones:
    ```
 3. Crea  un archivo `.env` con las credenciales:
    ```
-   MONGO_URI=mongodb+srv://...
-   JWT_SECRET=....  
-   FRONTEND_URL=...
-   EMAIL_USER=...
-   EMAIL_PASS=...
-   EMAIL_HOST=...
-   EMAIL_PORT=...
+   VITE_BACKEND_URL
    ```
 4. Ejecuta el proyecto con el siguiente comando:
    ```
    $ npm run dev:start
    ```
 
-Para probar la aplicación debes ingresar a un cliente HTTP (por ejemplo POSTMAN) 
+
 
 **Almacenamiento:**  Necesitamos una implementación de base de datos MongoDB.
 
@@ -97,8 +91,7 @@ $ npm run test:system
 
 Este proyecto está construído con las siguientes tecnologías:
 
-- [Node.js](https://nodejs.org/en/) Backend.
-- [Express](https://expressjs.com/) es una librería de [Node.js](https://nodejs.org/en/) para crear el API.
-- [MongoDB](https://www.mongodb.com/) es la base de datos principal.
-- [JWT (JSON Web Tokens)](https://jwt.io/) para almacenar información del usuario.
-- [Jest](https://jestjs.io/) para las pruebas automatizadas.
+- [axios](https://axios-http.com/docs/intro) Backend.
+- [Tailwind](https://tailwindcss.com/) 
+- [REACT](https://reactjs.org/) 
+- [Vite](https://vitejs.dev/) 
