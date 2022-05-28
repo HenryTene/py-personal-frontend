@@ -44,7 +44,16 @@ const ProyectosProvider = ({ children }) => {
   }, [auth]);
 
   useEffect(() => {
-    socket = io(import.meta.env.VITE_BACKEND_URL);
+    socket = io(import.meta.env.VITE_BACKEND_URL, {
+      withCredentials: true,
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            "my-custom-header": "abcd",
+          },
+        },
+      },
+    });
   }, []);
   const mostrarAlerta = (alerta) => {
     setAlerta(alerta);
@@ -469,7 +478,7 @@ const ProyectosProvider = ({ children }) => {
 
   const cerrarSesionProyectos = () => {
     setProyectos([]);
-    setProyecto({}); 
+    setProyecto({});
     setAlerta({});
   };
 
