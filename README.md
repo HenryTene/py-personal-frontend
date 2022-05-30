@@ -47,7 +47,7 @@ Para configurar este proyecto de forma local sigue estas instrucciones:
 | /api/proyectos/:id| 	DELETE | checkAuth() |Deletes a list of projects|
 
 
-Debido a la necesida de tener un servicio de email que pueda corroborar la identidad del usuario se han creado dos cuentas para que se pueda verficar la funcionalidad de la aplicacion:
+Debido a la necesidad de tener un servicio de email que pueda corroborar la identidad del usuario se han creado dos cuentas para que se pueda verficar la funcionalidad de la aplicacion:
 
 
 | Usuario 1 |admin@sp.com |clave:123456|
