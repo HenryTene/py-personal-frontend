@@ -42,7 +42,7 @@ const Login = () => {
   const { msg } = alerta;
   return (
     <>
-      <h1 className="text-sky-600 font-black text-6xl">
+      <h1 data-cy="titulo" className="text-sky-600 font-black text-6xl">
         Inicia Sesión en <span className="text-slate-800">Simple Project</span>{" "}
       </h1>
 
@@ -51,6 +51,7 @@ const Login = () => {
         action=""
         className="my-10 bg-white shadow rounded-lg p-10"
         onSubmit={handleSubmit}
+        data-cy="form-login"
       >
         <div className="my-5">
           <label
@@ -60,6 +61,7 @@ const Login = () => {
             Email
           </label>
           <input
+            data-cy="email-input"
             id="email"
             type="email"
             placeholder="Ingresa tu email"
@@ -76,6 +78,7 @@ const Login = () => {
             Password
           </label>
           <input
+            data-cy="password-input"
             id="password"
             type="password"
             placeholder="Ingresa tu password"
@@ -89,10 +92,12 @@ const Login = () => {
           value="Iniciar Sesión"
           className="bg-sky-700 mb-5 w-full  py-3 uppercase   font-bold text-white 
            rounded hover:cursor-pointer hover:bg-sky-800 transition-colors"
+          data-cy="sumbit-login"
         />
       </form>
       <nav className="lg:flex lg:justify-between ">
         <Link
+          data-cy="nueva-cuenta"
           className="block text-center my-5 text-slate-500 uppercase text-sm "
           to="/registrar"
         >
@@ -100,6 +105,7 @@ const Login = () => {
           ¿No tienes cuenta? Regístrate{" "}
         </Link>
         <Link
+          data-cy="olvide-cuenta"
           className="block text-center my-5 text-slate-500 uppercase text-sm "
           to="/olvide-password"
         >
